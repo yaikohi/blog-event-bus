@@ -52,6 +52,8 @@ app
       })
       .post("/", async ({ body, set }) => {
         console.log(body);
+        // @ts-ignore
+        events.push(body);
         await sendEventToServices(body);
 
         set.status = "OK";
