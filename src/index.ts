@@ -5,6 +5,25 @@ import { EventBodySchema } from "./schemas";
 
 const PORT = 4005;
 
+// --- SERVICE PORTS
+const PORT_POSTS = 4000;
+const PORT_COMMENTS = 4001;
+const PORT_QUERY = 4002;
+const PORT_MODERATION = 4003;
+//
+// --- SERVICE HOSTS
+const HOST_POSTS = "posts-clusterip-srv";
+const HOST_COMMENTS = "comments-srv";
+const HOST_QUERY = "query-srv";
+const HOST_MODERATION = "moderation-srv";
+// --- SERVICE URLS
+
+export const URL_POSTS = `http://${HOST_POSTS}:${PORT_POSTS}/events`;
+export const URL_COMMENTS = `http://${HOST_COMMENTS}:${PORT_COMMENTS}/events`;
+export const URL_QUERY = `http://${HOST_QUERY}:${PORT_QUERY}/events`;
+export const URL_MODERATION =
+  `http://${HOST_MODERATION}:${PORT_MODERATION}/events`;
+
 export async function sendEvent(
   { url, ev }: { url: string; ev: any },
 ) {
@@ -26,12 +45,10 @@ export async function sendEvent(
 export async function sendEventToServices(
   ev: any,
 ) {
-  const url = "http://localhost";
-
-  await sendEvent({ url: `${url}:4000/events`, ev });
-  await sendEvent({ url: `${url}:4001/events`, ev });
-  await sendEvent({ url: `${url}:4002/events`, ev });
-  await sendEvent({ url: `${url}:4003/events`, ev });
+  await sendEvent({ url: URL_POSTS, ev });
+  await sendEvent({ url: URL_COMMENTS, ev });
+  await sendEvent({ url: URL_QUERY, ev });
+  await sendEvent({ url: URL_MODERATION, ev });
 }
 
 // --- EVENTS DB
