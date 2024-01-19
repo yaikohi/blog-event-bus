@@ -8,11 +8,14 @@ const PORT = 4005;
 
 // --- EVENTS DB
 const events: EventType[] = [];
+
 // -- APP
 const app = new Elysia();
+
 // --- MIDDLEWARE
 app
   .use(cors());
+
 // --- ROUTES
 app
   .get("/", () => "Hello Elysia")
