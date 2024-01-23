@@ -60,8 +60,10 @@ export async function sendEvent(
 export async function sendEventToServices(
   ev: any,
 ) {
+  console.log("Sending events");
   await sendEvent({ url: getURL("posts"), ev });
   await sendEvent({ url: getURL("comments"), ev });
   await sendEvent({ url: getURL("query"), ev });
   await sendEvent({ url: getURL("moderation"), ev });
+  console.log("Finished sending events.");
 }
